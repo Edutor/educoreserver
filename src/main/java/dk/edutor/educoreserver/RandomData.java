@@ -24,15 +24,15 @@ public class RandomData {
         List<App> apps = new ArrayList<>();
         App a = new App();
         a.setName( "Autoret" );
-        a.setDesc( "One mark to rule them all" );
+        a.setDescription( "One mark to rule them all" );
         apps.add( a );
         a = new App();
         a.setName( "Studypoint" );
-        a.setDesc( "They are all pointing at me" );
+        a.setDescription( "They are all pointing at me" );
         apps.add( a );
         a = new App();
         a.setName( "Autofeedback" );
-        a.setDesc( "Hey, you are ok as you are" );
+        a.setDescription( "Hey, you are ok as you are" );
         apps.add( a );
         return apps;
     }

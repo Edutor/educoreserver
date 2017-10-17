@@ -10,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -36,7 +34,7 @@ public class App implements Serializable {
     private String name;
 
     @Size( max = 45 )
-    private String desc;
+    private String description;
 
     @JoinTable( name = "Appmin", joinColumns = {
         @JoinColumn( name = "App_id", referencedColumnName = "id" ) }, inverseJoinColumns = {
@@ -67,12 +65,12 @@ public class App implements Serializable {
         this.name = name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc( String desc ) {
-        this.desc = desc;
+    public void setDescription( String description ) {
+        this.description = description;
     }
 
     public Collection<User> getUsers() {
