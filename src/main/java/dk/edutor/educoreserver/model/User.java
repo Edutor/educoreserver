@@ -3,14 +3,15 @@ package dk.edutor.educoreserver.model;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -27,8 +28,7 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic( optional = false )
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
     @Size( max = 100 )
@@ -63,8 +63,8 @@ public class User implements Serializable {
     @ManyToMany( mappedBy = "users" )
     private Collection<App> apps;
     
-    @OneToOne( cascade = CascadeType.ALL, mappedBy = "user" )
-    private Enrollment enrollment;
+    @OneToMany(mappedBy = "id.user")
+    private Collection<Enrollment> enrollments;
 
     public User() {
     }
@@ -144,13 +144,7 @@ public class User implements Serializable {
         this.apps = apps;
     }
 
-    public Enrollment getEnrollment() {
-        return enrollment;
-    }
 
-    public void setEnrollment( Enrollment enrollment ) {
-        this.enrollment = enrollment;
-    }
 
     @Override
     public int hashCode() {
@@ -174,7 +168,15 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "dk.edutor.educoreserver.model.User[ id=" + id + " ]";
+        return "User[ name = " + fullName + " callName = " + callName + " email=" + prefEmail + " ]";
+    }
+
+    public Collection<Enrollment> getEnrollments() {
+        return enrollments;
+    }
+
+    public void setEnrollments( Collection<Enrollment> enrollments ) {
+        this.enrollments = enrollments;
     }
 
 }

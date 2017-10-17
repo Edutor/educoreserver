@@ -1,65 +1,102 @@
 package dk.edutor.educoreserver.model;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
-/**
- The purpose of Enrollment is to...
-
- @author kasper
- */
 @Entity
 @Table( name = "Enrollment" )
-@NamedQueries( {
-    @NamedQuery( name = "Enrollment.findAll", query = "SELECT e FROM Enrollment e" ) } )
 public class Enrollment implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Basic( optional = false )
-    @NotNull
-    @Column( name = "User_id" )
-    private Integer userid;
+    @Embeddable
+    public static class EnrollmentId implements Serializable {
+//        @Column(name = "User_id")
+//        private int user;
+//        @Column(name = "Group_id")
+//        private int grouping;
 
-    @Size( max = 45 )
+        @ManyToOne( fetch = FetchType.EAGER )
+//        /@JoinColumn( name = "User_id", nullable = false, insertable = false, updatable = false )
+        @JoinColumn( name = "User_id", nullable = false )
+        private User user;
+
+        @ManyToOne( fetch = FetchType.EAGER )
+//        @JoinColumn( name = "Group_id", nullable = false, insertable = false, updatable = false )
+        @JoinColumn( name = "Group_id", nullable = false )
+        private Grouping grouping;
+
+        @Override
+        public int hashCode() {
+//            return Integer.hashCode( getUser().getId() ) + Integer.hashCode( getGrouping().getId() );
+            return user.hashCode()+grouping.hashCode();
+        }
+
+        @Override
+        public boolean equals( Object obj ) {
+            if ( obj == null ) {
+                return false;
+            }
+            if ( !( obj instanceof EnrollmentId ) ) {
+                return false;
+            }
+            EnrollmentId other = (EnrollmentId) obj;
+            return user.getId() == other.user.getId() && grouping.getId() == other.grouping.getId();
+        }
+
+        public User getUser() {
+            return user;
+        }
+
+        public void setUser( User user ) {
+            this.user = user;
+        }
+
+        public Grouping getGrouping() {
+            return grouping;
+        }
+
+        public void setGrouping( Grouping grouping ) {
+            this.grouping = grouping;
+        }
+    }
+
+    @EmbeddedId
+    private EnrollmentId id;
+
+    @Column( name = "role" )
     private String role;
 
+    @Column( name = "active" )
     private Boolean active;
 
-    @JoinColumn( name = "Group_id", referencedColumnName = "id" )
-    @ManyToOne( optional = false )
-    private Grouping grouping;
-
-    @JoinColumn( name = "User_id", referencedColumnName = "id", insertable = false, updatable = false )
-    @OneToOne( optional = false )
-    private User user;
-
+//    @ManyToOne
+//    @JoinColumn( name = "Group_id", referencedColumnName = "id",
+//            updatable = false, insertable = false )
+//    private Grouping grouping;
+//
+//    @ManyToOne
+//    @JoinColumn( name = "User_id", referencedColumnName = "id",
+//            updatable = false, insertable = false )
+//    private User user;
     public Enrollment() {
     }
 
-    public Enrollment( Integer userid ) {
-        this.userid = userid;
-    }
-
-    public Integer getUserid() {
-        return userid;
-    }
-
-    public void setUserid( Integer userid ) {
-        this.userid = userid;
-    }
-
+//    public Enrollment( Integer userid ) {
+//        this.userid = userid;
+//    }
+//    public Integer getUserid() {
+//        return userid;
+//    }
+//
+//    public void setUserid( Integer userid ) {
+//        this.userid = userid;
+//    }
     public String getRole() {
         return role;
     }
@@ -77,44 +114,39 @@ public class Enrollment implements Serializable {
     }
 
     public Grouping getGrouping() {
-        return grouping;
+        return getId().grouping;
     }
 
     public void setGrouping( Grouping grouping ) {
-        this.grouping = grouping;
+        id.grouping = grouping;
     }
 
     public User getUser() {
-        return user;
+        return getId().user;
     }
 
     public void setUser( User user ) {
-        this.user = user;
+        id.user = user;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += ( userid != null ? userid.hashCode() : 0 );
-        return hash;
+
+    public EnrollmentId getId() {
+        return id;
     }
 
-    @Override
-    public boolean equals( Object object ) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if ( !( object instanceof Enrollment ) ) {
-            return false;
-        }
-        Enrollment other = (Enrollment) object;
-        if ( ( this.userid == null && other.userid != null ) || ( this.userid != null && !this.userid.equals( other.userid ) ) ) {
-            return false;
-        }
-        return true;
+    public void setId( EnrollmentId id ) {
+        this.id = id;
     }
 
     @Override
     public String toString() {
-        return "dk.edutor.educoreserver.model.Enrollment[ userid=" + userid + " ]";
+        return "Enrollment[ user=" + getUser().getFullName()
+                + " grouping=" + getGrouping().getName() + " ]";
     }
 
+    @Override
+    public int hashCode() {
+        return id.hashCode(); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }

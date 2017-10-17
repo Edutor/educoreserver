@@ -5,7 +5,7 @@
     <groupId>dk.edutor</groupId>
     <artifactId>EducoreServer</artifactId>
     <version>0.1-Test</version>
-    <packaging>ejb</packaging>
+    <packaging>jar</packaging>
 
     <name>EducoreServer</name>
 
@@ -32,6 +32,26 @@
             <artifactId>javaee-api</artifactId>
             <version>7.0</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>6.0.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.2.3.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>5.2.3.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mchange</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>0.9.5.2</version>
         </dependency>
     </dependencies>
 

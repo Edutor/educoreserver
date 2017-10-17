@@ -5,8 +5,9 @@ import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -25,13 +26,12 @@ import javax.validation.constraints.Size;
  @author kasper
  */
 @Entity
-@Table( name = "Group" )
-@NamedQueries( {
-    @NamedQuery( name = "Grouping.findAll", query = "SELECT g FROM Grouping g" ) } )
+@Table( name = "Grouping" )
 public class Grouping implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic( optional = false )
     @NotNull
     private Integer id;
@@ -55,7 +55,7 @@ public class Grouping implements Serializable {
     @ManyToOne
     private Grouping parent;
     
-    @OneToMany( cascade = CascadeType.ALL, mappedBy = "grouping" )
+    @OneToMany( mappedBy = "id.grouping" )
     private Collection<Enrollment> enrollments;
 
     public Grouping() {
@@ -151,7 +151,7 @@ public class Grouping implements Serializable {
 
     @Override
     public String toString() {
-        return "dk.edutor.educoreserver.model.Grouping[ id=" + id + " ]";
+        return "Grouping[ name=" + name + " ]";
     }
 
 }

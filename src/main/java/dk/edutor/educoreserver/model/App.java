@@ -3,8 +3,9 @@ package dk.edutor.educoreserver.model;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -16,29 +17,29 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- * The purpose of App is to...
- * @author kasper
+ The purpose of App is to...
+
+ @author kasper
  */
 @Entity
 @Table( name = "App" )
-@NamedQueries( { 
-    @NamedQuery( name = "App.findAll", query = "SELECT a FROM App a" ) } )
 public class App implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue( strategy = GenerationType.IDENTITY )
     @Basic( optional = false )
     @NotNull
     private Integer id;
-    
+
     @Size( max = 45 )
     private String name;
-    
+
     @Size( max = 45 )
     private String desc;
-    
-    @JoinTable( name = "Appmin", joinColumns = { 
-        @JoinColumn( name = "App_id", referencedColumnName = "id" ) }, inverseJoinColumns = { 
+
+    @JoinTable( name = "Appmin", joinColumns = {
+        @JoinColumn( name = "App_id", referencedColumnName = "id" ) }, inverseJoinColumns = {
         @JoinColumn( name = "User_id", referencedColumnName = "id" ) } )
     @ManyToMany
     private Collection<User> users;
