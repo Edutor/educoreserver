@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
-import javax.persistence.EntityManager;
 
 /**
  The purpose of RandomData is to...
@@ -63,8 +62,6 @@ public class RandomData {
                 id.setGrouping( grp );
                 id.setUser(u);
                 enroll.setId(id );
-//                enroll.setGrouping( grp );
-//                enroll.setUser( u );
                 enroll.setRole( u.getRole() );
                 enroll.setActive( rnd.nextFloat() > 0.05 );
                 enrollments.add( enroll );

@@ -32,11 +32,8 @@ public class Grouping implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic( optional = false )
-    @NotNull
     private Integer id;
     
-    @Size( max = 45 )
     private String name;
     
     @Temporal( TemporalType.DATE )
@@ -45,7 +42,6 @@ public class Grouping implements Serializable {
     @Temporal( TemporalType.DATE )
     private Date end;
     
-    @Size( max = 45 )
     private String type;
     
     @OneToMany( mappedBy = "parent" )

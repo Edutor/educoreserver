@@ -16,24 +16,17 @@ public class Enrollment implements Serializable {
 
     @Embeddable
     public static class EnrollmentId implements Serializable {
-//        @Column(name = "User_id")
-//        private int user;
-//        @Column(name = "Group_id")
-//        private int grouping;
 
         @ManyToOne( fetch = FetchType.EAGER )
-//        /@JoinColumn( name = "User_id", nullable = false, insertable = false, updatable = false )
         @JoinColumn( name = "User_id", nullable = false )
         private User user;
 
         @ManyToOne( fetch = FetchType.EAGER )
-//        @JoinColumn( name = "Group_id", nullable = false, insertable = false, updatable = false )
         @JoinColumn( name = "Group_id", nullable = false )
         private Grouping grouping;
 
         @Override
         public int hashCode() {
-//            return Integer.hashCode( getUser().getId() ) + Integer.hashCode( getGrouping().getId() );
             return user.hashCode()+grouping.hashCode();
         }
 
@@ -75,28 +68,9 @@ public class Enrollment implements Serializable {
     @Column( name = "active" )
     private Boolean active;
 
-//    @ManyToOne
-//    @JoinColumn( name = "Group_id", referencedColumnName = "id",
-//            updatable = false, insertable = false )
-//    private Grouping grouping;
-//
-//    @ManyToOne
-//    @JoinColumn( name = "User_id", referencedColumnName = "id",
-//            updatable = false, insertable = false )
-//    private User user;
     public Enrollment() {
     }
 
-//    public Enrollment( Integer userid ) {
-//        this.userid = userid;
-//    }
-//    public Integer getUserid() {
-//        return userid;
-//    }
-//
-//    public void setUserid( Integer userid ) {
-//        this.userid = userid;
-//    }
     public String getRole() {
         return role;
     }
@@ -146,7 +120,7 @@ public class Enrollment implements Serializable {
 
     @Override
     public int hashCode() {
-        return id.hashCode(); //To change body of generated methods, choose Tools | Templates.
+        return id.hashCode(); 
     }
     
 }

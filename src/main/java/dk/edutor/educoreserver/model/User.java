@@ -22,8 +22,6 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table( name = "User" )
-@NamedQueries( { 
-    @NamedQuery( name = "User.findAll", query = "SELECT u FROM User u" ) } )
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -155,7 +153,6 @@ public class User implements Serializable {
 
     @Override
     public boolean equals( Object object ) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if ( !( object instanceof User ) ) {
             return false;
         }
