@@ -31,8 +31,8 @@ public class AppMain {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("educore");
         EntityManager em = emf.createEntityManager();
         
-        List<User> users = generateUsers( 40 );
-        List<Grouping> groupings = generateGroups( 2 );
+        List<User> users = generateUsers( 300 );
+        List<Grouping> groupings = generateGroups( 15 );
         List<App> apps = generateApps();
         List<Enrollment> enrollments = enroll(groupings, users);
         setAppmins( apps, users );
