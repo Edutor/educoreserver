@@ -1,17 +1,13 @@
 package dk.edutor.educoreserver;
 
-import dk.edutor.educoreserver.model.App;
-import dk.edutor.educoreserver.model.Enrollment;
-import dk.edutor.educoreserver.model.Enrollment.EnrollmentId;
-import dk.edutor.educoreserver.model.Grouping;
-import dk.edutor.educoreserver.model.User;
+import dk.edutor.educoreserver.model.*;
+
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
-import javax.persistence.EntityManager;
 
 /**
  The purpose of RandomData is to...
@@ -59,7 +55,7 @@ public class RandomData {
             for ( int i = 0; i < classSize; i++ ) {
                 User u = ulist.remove( rnd.nextInt( ulist.size() ) );
                 Enrollment enroll = new Enrollment();
-                EnrollmentId id = new Enrollment.EnrollmentId();
+                EnrollmentId id = new EnrollmentId();
                 id.setGrouping( grp );
                 id.setUser(u);
                 enroll.setId(id );

@@ -1,71 +1,15 @@
 package dk.edutor.educoreserver.model;
 
+import org.crygier.graphql.annotation.GraphQLIgnore;
+
+import javax.persistence.*;
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 @Entity
 @Table( name = "Enrollment" )
 public class Enrollment implements Serializable {
 
-    @Embeddable
-    public static class EnrollmentId implements Serializable {
-//        @Column(name = "User_id")
-//        private int user;
-//        @Column(name = "Group_id")
-//        private int grouping;
-
-        @ManyToOne( fetch = FetchType.EAGER )
-//        /@JoinColumn( name = "User_id", nullable = false, insertable = false, updatable = false )
-        @JoinColumn( name = "User_id", nullable = false )
-        private User user;
-
-        @ManyToOne( fetch = FetchType.EAGER )
-//        @JoinColumn( name = "Group_id", nullable = false, insertable = false, updatable = false )
-        @JoinColumn( name = "Group_id", nullable = false )
-        private Grouping grouping;
-
-        @Override
-        public int hashCode() {
-//            return Integer.hashCode( getUser().getId() ) + Integer.hashCode( getGrouping().getId() );
-            return user.hashCode()+grouping.hashCode();
-        }
-
-        @Override
-        public boolean equals( Object obj ) {
-            if ( obj == null ) {
-                return false;
-            }
-            if ( !( obj instanceof EnrollmentId ) ) {
-                return false;
-            }
-            EnrollmentId other = (EnrollmentId) obj;
-            return user.getId() == other.user.getId() && grouping.getId() == other.grouping.getId();
-        }
-
-        public User getUser() {
-            return user;
-        }
-
-        public void setUser( User user ) {
-            this.user = user;
-        }
-
-        public Grouping getGrouping() {
-            return grouping;
-        }
-
-        public void setGrouping( Grouping grouping ) {
-            this.grouping = grouping;
-        }
-    }
-
+    @GraphQLIgnore
     @EmbeddedId
     private EnrollmentId id;
 
@@ -74,6 +18,12 @@ public class Enrollment implements Serializable {
 
     @Column( name = "active" )
     private Boolean active;
+
+    @MapsId( value = "id.User_id")
+    @ManyToOne
+    User user;
+
+
 
 //    @ManyToOne
 //    @JoinColumn( name = "Group_id", referencedColumnName = "id",
@@ -114,19 +64,19 @@ public class Enrollment implements Serializable {
     }
 
     public Grouping getGrouping() {
-        return getId().grouping;
+        return getId().getGrouping();
     }
 
     public void setGrouping( Grouping grouping ) {
-        id.grouping = grouping;
+        id.setGrouping(grouping);
     }
 
     public User getUser() {
-        return getId().user;
+        return getId().getUser();
     }
 
     public void setUser( User user ) {
-        id.user = user;
+        id.setUser(user);
     }
 
 

@@ -36,7 +36,7 @@ public class AppMain {
         List<App> apps = generateApps();
         List<Enrollment> enrollments = enroll(groupings, users);
         setAppmins( apps, users );
-        
+
         em.getTransaction().begin();
         for(User user: users) em.persist( user);
         for(Grouping grp: groupings) em.persist( grp);
