@@ -2,19 +2,14 @@ package dk.edutor.educoreserver.model;
 
 import java.io.Serializable;
 import java.util.Collection;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  * The purpose of User is to...
@@ -29,33 +24,21 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    @Size( max = 100 )
     @Column( name = "fullname" )
     private String fullName;
     
-    @Size( max = 45 )
     @Column( name = "callname" )
     private String callName;
     
-    @Basic( optional = false )
-    @NotNull
-    @Size( min = 1, max = 100 )
     @Column( name = "cph_email" )
     private String cphEmail;
     
-    @Size( max = 100 )
     @Column( name = "pref_email" )
     private String prefEmail;
     
-    @Basic( optional = false )
-    @NotNull
-    @Size( min = 1, max = 256 )
     @Column( name = "pw_hash" )
     private String pwHash;
     
-    @Basic( optional = false )
-    @NotNull
-    @Size( min = 1, max = 45 )
     private String role;
     
     @ManyToMany( mappedBy = "users" )
