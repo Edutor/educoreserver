@@ -1,5 +1,9 @@
 **/persistence.xml
 
+# Netbeans
+nbactions.xml
+nb-configuration.xml
+
 # Intellij
 *.iml
 .idea
