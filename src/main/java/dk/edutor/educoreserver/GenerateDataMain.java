@@ -5,7 +5,7 @@ import dk.edutor.educoreserver.model.*;
 import java.util.List;
 import javax.persistence.*;
 
-public class AppMain {
+public class GenerateDataMain {
 
     public static void main (String...args) throws InterruptedException {
 
@@ -45,18 +45,5 @@ public class AppMain {
         
         em.getTransaction().commit();
         emf.close();
-    }
-
-    private static void insertTest( EntityManager em ) {
-        em.getTransaction().begin();
-        User user = new User();
-        user.setFullName("Joe Hollyday");
-        user.setCallName( "Jolly");
-        user.setCphEmail( "nomail@gmail.com");
-        user.setPrefEmail( "nomailis@goodmail.com");
-        user.setPwHash( "Urt");
-        user.setRole( "student");
-        em.persist(user);
-        em.getTransaction().commit();
     }
 }

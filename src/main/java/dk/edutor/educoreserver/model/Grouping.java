@@ -3,22 +3,16 @@ package dk.edutor.educoreserver.model;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  The purpose of Grouping is to...
@@ -32,11 +26,8 @@ public class Grouping implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic( optional = false )
-    @NotNull
     private Integer id;
     
-    @Size( max = 45 )
     private String name;
     
     @Temporal( TemporalType.DATE )
@@ -45,7 +36,6 @@ public class Grouping implements Serializable {
     @Temporal( TemporalType.DATE )
     private Date end;
     
-    @Size( max = 45 )
     private String type;
     
     @OneToMany( mappedBy = "parent" )

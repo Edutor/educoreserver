@@ -24,16 +24,14 @@ import javax.validation.constraints.Size;
 public class App implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
-    @Basic( optional = false )
     @NotNull
     private Integer id;
 
-    @Size( max = 45 )
     private String name;
 
-    @Size( max = 45 )
     private String description;
 
     @JoinTable( name = "Appmin", joinColumns = {
@@ -90,20 +88,13 @@ public class App implements Serializable {
 
     @Override
     public boolean equals( Object object ) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if ( !( object instanceof App ) ) {
-            return false;
-        }
         App other = (App) object;
-        if ( ( this.id == null && other.id != null ) || ( this.id != null && !this.id.equals( other.id ) ) ) {
-            return false;
-        }
-        return true;
+        return this.id.equals( other.id ); 
     }
 
     @Override
     public String toString() {
-        return "dk.edutor.educoreserver.model.App[ id=" + id + " ]";
+        return "App[ name=" + name + " ]";
     }
 
 }

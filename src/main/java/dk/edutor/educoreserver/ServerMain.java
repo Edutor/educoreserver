@@ -25,13 +25,11 @@ class ServerMain {
 
     @Bean
     public GraphQLExecutor graphQLExecutor() {
-        System.out.println("Kommer vi hertil?");
         return new GraphQLExecutor(getEntityManager());
     }
 
     @Bean
     public GraphQlController graphQlController() {
-        System.out.println("Kommer vi hertil2?");
         return new GraphQlController();
     }
 

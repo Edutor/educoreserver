@@ -59,8 +59,6 @@ public class RandomData {
                 id.setGrouping( grp );
                 id.setUser(u);
                 enroll.setId(id );
-//                enroll.setGrouping( grp );
-//                enroll.setUser( u );
                 enroll.setRole( u.getRole() );
                 enroll.setActive( rnd.nextFloat() > 0.05 );
                 enrollments.add( enroll );

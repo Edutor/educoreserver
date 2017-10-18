@@ -9,7 +9,6 @@ import java.io.Serializable;
 @Table( name = "Enrollment" )
 public class Enrollment implements Serializable {
 
-    @GraphQLIgnore
     @EmbeddedId
     private EnrollmentId id;
 
@@ -19,34 +18,9 @@ public class Enrollment implements Serializable {
     @Column( name = "active" )
     private Boolean active;
 
-    @MapsId( value = "id.User_id")
-    @ManyToOne
-    User user;
-
-
-
-//    @ManyToOne
-//    @JoinColumn( name = "Group_id", referencedColumnName = "id",
-//            updatable = false, insertable = false )
-//    private Grouping grouping;
-//
-//    @ManyToOne
-//    @JoinColumn( name = "User_id", referencedColumnName = "id",
-//            updatable = false, insertable = false )
-//    private User user;
     public Enrollment() {
     }
 
-//    public Enrollment( Integer userid ) {
-//        this.userid = userid;
-//    }
-//    public Integer getUserid() {
-//        return userid;
-//    }
-//
-//    public void setUserid( Integer userid ) {
-//        this.userid = userid;
-//    }
     public String getRole() {
         return role;
     }
@@ -96,7 +70,7 @@ public class Enrollment implements Serializable {
 
     @Override
     public int hashCode() {
-        return id.hashCode(); //To change body of generated methods, choose Tools | Templates.
+        return id.hashCode();
     }
     
 }
